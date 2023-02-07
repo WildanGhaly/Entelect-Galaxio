@@ -11,7 +11,8 @@ public class GameObject {
   public Position position;
   public ObjectTypes gameObjectType;
 
-  public GameObject(UUID id, Integer size, Integer speed, Integer currentHeading, Position position, ObjectTypes gameObjectType) {
+  public GameObject(UUID id, Integer size, Integer speed, Integer currentHeading, Position position,
+      ObjectTypes gameObjectType) {
     this.id = id;
     this.size = size;
     this.speed = speed;
@@ -52,6 +53,10 @@ public class GameObject {
     this.position = position;
   }
 
+  public Integer getCurrentHeading() {
+    return currentHeading;
+  }
+
   public ObjectTypes getGameObjectType() {
     return gameObjectType;
   }
@@ -60,9 +65,9 @@ public class GameObject {
     this.gameObjectType = gameObjectType;
   }
 
-  public static GameObject FromStateList(UUID id, List<Integer> stateList)
-  {
+  public static GameObject FromStateList(UUID id, List<Integer> stateList) {
     Position position = new Position(stateList.get(4), stateList.get(5));
-    return new GameObject(id, stateList.get(0), stateList.get(1), stateList.get(2), position, ObjectTypes.valueOf(stateList.get(3)));
+    return new GameObject(id, stateList.get(0), stateList.get(1), stateList.get(2), position,
+        ObjectTypes.valueOf(stateList.get(3)));
   }
 }
