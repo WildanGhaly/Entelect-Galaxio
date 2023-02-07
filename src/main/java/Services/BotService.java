@@ -97,7 +97,7 @@ public class BotService {
                             .comparing(item -> getDistanceBetween(bot, item)))
                     .collect(Collectors.toList());
 
-            var torpedoSalveList = gameState.getGameObjects()
+            var torpedoSalvoList = gameState.getGameObjects()
                     .stream().filter(item -> item.getGameObjectType() == ObjectTypes.TORPEDOSALVO)
                     .sorted(Comparator
                             .comparing(item -> getDistanceBetween(bot, item)))
