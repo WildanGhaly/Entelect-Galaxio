@@ -10,6 +10,7 @@ public class GameObject {
   public Integer currentHeading;
   public Position position;
   public ObjectTypes gameObjectType;
+  public Integer torpedoSalvoCount;
 
   public GameObject(UUID id, Integer size, Integer speed, Integer currentHeading, Position position,
       ObjectTypes gameObjectType) {
