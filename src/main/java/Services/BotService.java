@@ -16,7 +16,6 @@ public class BotService {
         this.gameState = new GameState();
     }
 
-
     public GameObject getBot() {
         return this.bot;
     }
@@ -37,7 +36,6 @@ public class BotService {
         playerAction.action = PlayerActions.FORWARD;
         playerAction.heading = new Random().nextInt(360);
 
-
         if (!gameState.getGameObjects().isEmpty()) {
             var foodList = gameState.getGameObjects()
                     .stream().filter(item -> item.getGameObjectType() == ObjectTypes.FOOD)
@@ -46,59 +44,58 @@ public class BotService {
                     .collect(Collectors.toList());
 
             var playerList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.PLAYER)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.PLAYER)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
             var wormholeList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.WORMHOLE)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.WORMHOLE)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
+            var gasCloudList = gameState.getGameObjects()
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.GASCLOUD)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
-            var gascloudList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.GASCLOUD)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+            var asteroidFieldList = gameState.getGameObjects()
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.ASTEROIDFIELD)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
-            var asteroidfieldList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.ASTEROIDFIELD)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+            var superFoodList = gameState.getGameObjects()
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERFOOD)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
-            var superfoodList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERFOOD)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+            var supernovaPickupList = gameState.getGameObjects()
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERNOVAPICKUP)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
-            var supernovapickupList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERNOVAPICKUP)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
-
-            var psupernovabombList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERNOVABOMB)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+            var supernovaBombList = gameState.getGameObjects()
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERNOVABOMB)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
             var teleporterList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.TELEPORTER)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.TELEPORTER)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
             var shieldList = gameState.getGameObjects()
-                .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SHIELD)
-                .sorted(Comparator
-                        .comparing(item -> getDistanceBetween(bot, item)))
-                .collect(Collectors.toList());
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SHIELD)
+                    .sorted(Comparator
+                            .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
 
             playerAction.heading = getHeadingBetween(foodList.get(0));
         }
@@ -116,7 +113,8 @@ public class BotService {
     }
 
     private void updateSelfState() {
-        Optional<GameObject> optionalBot = gameState.getPlayerGameObjects().stream().filter(gameObject -> gameObject.id.equals(bot.id)).findAny();
+        Optional<GameObject> optionalBot = gameState.getPlayerGameObjects().stream()
+                .filter(gameObject -> gameObject.id.equals(bot.id)).findAny();
         optionalBot.ifPresent(bot -> this.bot = bot);
     }
 
