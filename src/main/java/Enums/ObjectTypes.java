@@ -13,6 +13,7 @@ public enum ObjectTypes {
   TELEPORTER(10),
   SHIELD(11);
 
+
   public final Integer value;
 
   ObjectTypes(Integer value) {

@@ -8,11 +8,11 @@ public class GameStateDto {
   private Map<String, List<Integer>> gameObjects;
   private Map<String, List<Integer>> playerObjects;
 
-  public Models.World getWorld() {
+  public World getWorld() {
     return world;
   }
 
-  public void setWorld(Models.World world) {
+  public void setWorld(World world) {
     this.world = world;
   }
 
@@ -29,6 +29,6 @@ public class GameStateDto {
   }
 
   public void setPlayerObjects(Map<String, List<Integer>> playerObjects) {
-    playerObjects = playerObjects;
+    this.playerObjects = playerObjects;
   }
 }
