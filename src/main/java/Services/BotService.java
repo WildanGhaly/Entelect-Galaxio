@@ -199,7 +199,22 @@ public void computeNextPlayerAction(PlayerAction playerAction) {
                 playerAction.heading = getHeadingBetween(playerList.get(0));
                 System.out.println("Heading to player"); 
         }
-
+        else if (torpedoSalvoList.size()>0){
+                for (int i=0;i< torpedoSalvoList.size();i++){
+                    if ((torpedoSalvoList.get(i).currentHeading==getHeadingBetween(torpedoSalvoList.get(i))+180%360) && getDistanceBetween(bot, torpedoSalvoList.get(i))>100){
+                        playerAction.action = PlayerActions.ACTIVATESHIELD;
+                        playerAction.heading = getHeadingBetween(foodNotNearEdgeList.get(0));
+                        System.out.println("Shield activated");
+                        break;
+                    }
+                    else{
+                        playerAction.action = PlayerActions.FORWARD;
+                        playerAction.heading = getHeadingBetween(foodNotNearEdgeList.get(0));
+                        System.out.println("Heading to food");
+                    }
+                }
+            }
+        
         /* Menjauhi gascloud dan asteroid */
         else if (obstacleList.size()>0 && getDistanceBetween(obstacleList.get(0), bot)<100){
                 playerAction.action = PlayerActions.FORWARD;
@@ -255,59 +270,6 @@ public void computeNextPlayerAction(PlayerAction playerAction) {
                 return (int) (v * (180 / Math.PI));
         }
 
-
-        private int ResolveNewTarget(){
-                var foodList = gameState.getGameObjects()
-                        .stream().filter(item -> item.getGameObjectType() == ObjectTypes.FOOD)
-                        .sorted(Comparator
-                                .comparing(item -> getDistanceBetween(bot, item)))
-                        .collect(Collectors.toList());
-
-                var playerList = gameState.getGameObjects()
-                        .stream().filter(item -> item.getGameObjectType() == ObjectTypes.PLAYER)
-                        .sorted(Comparator
-                                .comparing(item -> getDistanceBetween(bot, item)))
-                        .collect(Collectors.toList());
-
-                if (foodList.size() > 0 && playerList.size() > 0) {
-                        if (getDistanceBetween(bot, foodList.get(0)) < getDistanceBetween(bot, playerList.get(0))) {
-                                target = foodList.get(0);
-                                targetIsPlayer = false;
-                        } else {
-                                target = playerList.get(0);
-                                targetIsPlayer = true;
-                        }
-                } else if (foodList.size() > 0) {
-                        target = foodList.get(0);
-                        targetIsPlayer = false;
-                } else if (playerList.size() > 0) {
-                        target = playerList.get(0);
-                        targetIsPlayer = true;
-                } else {
-                        target = worldCenter;
-                        targetIsPlayer = false;
-                }
-
-                return getHeadingBetween(target);
-        }
-
-        private int getAttackerResolution(GameObject bot, GameObject attacker, GameObject closestFood) {
-                if (closestFood == null) {
-                        return GetOppositeDirection(bot, attacker);
-                }
-                
-                double distanceToAttacker = getDistanceBetween(attacker,bot);
-                double distanceBetweenAttackerAndFood = getDistanceBetween(attacker, closestFood);
-                
-                if (distanceToAttacker > attacker.getSpeed() &&
-                        distanceBetweenAttackerAndFood > distanceToAttacker) {
-                        System.out.println("Atk is far, going for food");
-                        return getDirection(bot, closestFood);
-                } else {
-                        System.out.println("Running");
-                        return GetOppositeDirection(bot, attacker);
-                }
-        }
 
         private int GetOppositeDirection(GameObject gameObject1, GameObject gameObject2){
                 var direction = toDegrees(Math.atan2(gameObject2.getPosition().y - gameObject1.getPosition().y, gameObject2.getPosition().x - gameObject1.getPosition().x));
