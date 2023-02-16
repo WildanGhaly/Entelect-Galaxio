@@ -144,7 +144,7 @@ public class BotService {
             var teleportHeading=-1;
             /* Mendapatkan ukuran dari bot */
             var botsize = this.bot.size;
-
+            var test=0;
             /* Mendapatkan ukuran dari musuh terdekat */
             var enemySize = playerList.get(0).size;
 
