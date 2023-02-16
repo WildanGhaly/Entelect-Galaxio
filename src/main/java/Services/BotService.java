@@ -237,17 +237,12 @@ public class BotService {
 
             /* Jika kondisi teleporter atau defending belum memberikan aksi maka akan masuk ke kondisional di bawah */
             if (!done){
-                if (botsize > 150){
-                    /* Jika ukuran bot sudah terlalu besar maka bot akan menembak musuh terdekat */
-                    System.out.println("Bot is attacking because too fat!");
-                    playerAction.action = PlayerActions.FIRETORPEDOES;
-                    playerAction.heading = headPlayer;
-                } else if ((nearestPlayer < 150 + 4 * enemySize) && (enemySize < botsize) && (enemySize > 0.2 * botsize) && (botsize > 200)){
+                if ((nearestPlayer < 150 + 4 * enemySize) && (enemySize < botsize) && (enemySize > 0.2 * botsize) && (botsize > 20)){
                     /* Bot akan menembak dengan kondisi tertentu */
                     System.out.println("Bot is attacking!");
                     playerAction.action = PlayerActions.FIRETORPEDOES;
                     playerAction.heading = headPlayer;
-                } else if ((nearestPlayer < 150 + 4 * enemySize) && (botsize > 0.4 * enemySize) && (botsize > 40)){
+                } else if ((nearestPlayer < 150 + 4 * enemySize) && (botsize > 0.4 * enemySize) && (botsize > 20)){
                     /* Bot berani melawan musuh yang sedikit lebih besar dari dirinya */
                     System.out.println("Bot is not scared at all!");
                     playerAction.action = PlayerActions.FIRETORPEDOES;
