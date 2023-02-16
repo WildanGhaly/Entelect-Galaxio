@@ -158,7 +158,7 @@ public class BotService {
             if (teleporterList.size() == 0){
                 haveTeleporter = false;
             }
-
+            
             /* Membuat kondisi penembakan teleported */
             if (botsize > 150 && !haveTeleporter){
                 System.out.println("Bot sent teleporter!");
@@ -183,6 +183,14 @@ public class BotService {
                         }
                     }
                     
+                }
+
+                if (bordeRadius < botToMid + 1.3 * botsize){
+                    /* Bot menghindar dari border dan menuju ke tengah */
+                    System.out.println("Bot is running from border!");
+                    playerAction.heading = headMid;
+                    playerAction.action = PlayerActions.FORWARD;
+                    done = true;
                 }
 
                 /* Mendapatkan kondisi teleporter apabila bot aman untuk teleport */
@@ -219,7 +227,7 @@ public class BotService {
                 } else if (salvoDist < 100 + 1.2 * botsize){
                     /* Jika bot berukuran kecil dan ada peluru mendekat maka bot akan melarikan diri dari peluru */
                     System.out.println("Bot is running from salvo!");
-                    playerAction.heading = headSalvo + 120;
+                    playerAction.heading = (headSalvo + 120)%360;
                     playerAction.action = PlayerActions.FORWARD;
                     done = true;
                 } else {
@@ -234,7 +242,7 @@ public class BotService {
                     System.out.println("Bot is attacking because too fat!");
                     playerAction.action = PlayerActions.FIRETORPEDOES;
                     playerAction.heading = headPlayer;
-                } else if ((nearestPlayer < 150 + 4 * enemySize) && (enemySize < botsize) && (enemySize > 0.2 * botsize) && (botsize > 40)){
+                } else if ((nearestPlayer < 150 + 4 * enemySize) && (enemySize < botsize) && (enemySize > 0.2 * botsize) && (botsize > 200)){
                     /* Bot akan menembak dengan kondisi tertentu */
                     System.out.println("Bot is attacking!");
                     playerAction.action = PlayerActions.FIRETORPEDOES;
