@@ -159,8 +159,16 @@ public class BotService {
                 haveTeleporter = false;
             }
             
+            if (bordeRadius < botToMid + 1.3 * botsize){
+                /* Bot menghindar dari border dan menuju ke tengah */
+                System.out.println("Bot is running from border!");
+                playerAction.heading = headMid;
+                playerAction.action = PlayerActions.FORWARD;
+                done = true;
+            }
+
             /* Membuat kondisi penembakan teleported */
-            if (botsize > 150 && !haveTeleporter){
+            if (botsize > 150 && !haveTeleporter && !done){
                 System.out.println("Bot sent teleporter!");
                 playerAction.heading = getHeadingBetween(playerList.get(0));
                 playerAction.action = PlayerActions.FIRETELEPORT;
@@ -183,14 +191,6 @@ public class BotService {
                         }
                     }
                     
-                }
-
-                if (bordeRadius < botToMid + 1.3 * botsize){
-                    /* Bot menghindar dari border dan menuju ke tengah */
-                    System.out.println("Bot is running from border!");
-                    playerAction.heading = headMid;
-                    playerAction.action = PlayerActions.FORWARD;
-                    done = true;
                 }
 
                 /* Mendapatkan kondisi teleporter apabila bot aman untuk teleport */
