@@ -249,7 +249,7 @@ public class BotService {
                     System.out.println("Bot is attacking!");
                     playerAction.action = PlayerActions.FIRETORPEDOES;
                     playerAction.heading = headPlayer;
-                } else if (nearestPlayer < 150 + 2 * enemySize){
+                } else if (nearestPlayer < 150 + 2 * enemySize && this.bot.getSize()<playerList.get(0).getSize()){
                     /* Bot melarikan diri dari musuh yang terlalu besar */
                     System.out.println("Bot is running for his life!");
                     playerAction.action = PlayerActions.FORWARD;
