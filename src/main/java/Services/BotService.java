@@ -217,7 +217,7 @@ public class BotService {
             if ((!done) && (torpedoSalvoList.size() > 0)){
                 var salvoDist = getDistanceBetween(this.bot, torpedoSalvoList.get(0));
                 var headSalvo = getHeadingBetween(torpedoSalvoList.get(0));
-                System.out.println("Salvo: " + salvoDist + " Head: " + headSalvo);
+                System.out.println("Salvo: " + salvoDist + " Head: " + headSalvo); 
                 if ((salvoDist < 100 + 1.2 * botsize) && (botsize > 100)){
                     /* Jika bot berukuran besar dan ada peluru mendekat maka bot akan mengaktifkan shield */
                     System.out.println("Bot is activating shield!");
@@ -246,11 +246,6 @@ public class BotService {
                     /* Bot akan menembak dengan kondisi tertentu */
                     System.out.println("Bot is attacking!");
                     playerAction.action = PlayerActions.FIRETORPEDOES;
-                    playerAction.heading = headPlayer;
-                } else if ((nearestPlayer < 150 + 4 * enemySize) && (enemySize < botsize)){
-                    /* Bot mendekat ke musuh yang lebih kecil */
-                    System.out.println("Bot is just chasing weak enemy!");
-                    playerAction.action = PlayerActions.FORWARD;
                     playerAction.heading = headPlayer;
                 } else if ((nearestPlayer < 150 + 4 * enemySize) && (botsize > 0.4 * enemySize) && (botsize > 40)){
                     /* Bot berani melawan musuh yang sedikit lebih besar dari dirinya */
