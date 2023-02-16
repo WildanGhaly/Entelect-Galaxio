@@ -141,7 +141,7 @@ public class BotService {
             } else {
                 foodFarEdgeDist = 99999;
             }
-
+            var teleportHeading=-1;
             /* Mendapatkan ukuran dari bot */
             var botsize = this.bot.size;
 
@@ -164,6 +164,7 @@ public class BotService {
                 System.out.println("Bot sent teleporter!");
                 playerAction.heading = getHeadingBetween(playerList.get(0));
                 playerAction.action = PlayerActions.FIRETELEPORT;
+                teleportHeading = getHeadingBetween(playerList.get(0));
                 haveTeleporter = true;
                 done = true;
             } else if (haveTeleporter && !done){
@@ -173,7 +174,7 @@ public class BotService {
                 /* Mendapatkan kondisi teleporter, jika berbahaya maka bot tidak akan teleport */
                 for (j = 0; (j < teleporterList.size()) && (!done); j++){
                     while (k < playerList.size()){
-                        if ((getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100 + 1.2 * playerList.get(k).size) && (playerList.get(k).size > botsize)){
+                        if ((getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100 + 1.2 * playerList.get(k).size) && (playerList.get(k).size > botsize) && teleporterList.get(j).currentHeading == teleportHeading){
                             System.out.println("Bot is NOT going for TELEPORT!");
                             shouldTeleport = false;
                             break;
@@ -188,7 +189,7 @@ public class BotService {
                 for (j = 0; (j < teleporterList.size()) && (!done) && (shouldTeleport); j++){
                     k = 0;
                     while (k < playerList.size() && !done){
-                        if (shouldTeleport && (getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100 + 1.2 * playerList.get(k).size) && (playerList.get(k).size < botsize)){
+                        if (shouldTeleport && (getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100 + 1.2 * playerList.get(k).size) && (playerList.get(k).size < botsize)&& teleporterList.get(j).currentHeading == teleportHeading){
                             System.out.println("Bot is going for TELEPORT!");
                             playerAction.heading = getHeadingBetween(playerList.get(k));
                             playerAction.action = PlayerActions.TELEPORT;
