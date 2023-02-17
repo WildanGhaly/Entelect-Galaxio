@@ -31,7 +31,9 @@ Prioritas dari _bot_ secara berurutan adalah sebagai berikut :
 
 ## Requirements
 
-Program menggunakan maven sebagai build tools-nya sehingga
+- dotnet core 3.1
+- dotnet core 5.0
+- maven
 
 ## Compile
 
