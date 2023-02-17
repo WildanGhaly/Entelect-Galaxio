@@ -1,4 +1,19 @@
 # Lil'Greedy
+Tubes 1 Strategi algoritma, pengimplementasian algoritma greedy untuk membuat sebuah bot permainan galaxio dengan menggunakan bahasa java.
+
+
+  
+- [Lil'Greedy](#lilgreedy)
+  - [Authors](#authors)
+  - [GGA (Galaxio's Greedy Algorithm) yang Dipakai](#gga-galaxios-greedy-algorithm-yang-dipakai)
+  - [Requirements](#requirements)
+  - [Compile](#compile)
+
+## Authors
+
+- Hidayatullah Wildan Ghaly Buchary - 13521015
+- Raditya Naufal Abiyu - 13521022
+- Fatih Nararya Rashadyfa I. - 13521060
 
 ## GGA (Galaxio's Greedy Algorithm) yang Dipakai
 
@@ -22,12 +37,6 @@ Program menggunakan maven sebagai build tools-nya sehingga
 
 Bot di-compile dengan menjalankan
 
-```
+``` java
 mvn clean package
 ```
-
-### Authors
-
-- Hidayatullah Wildan Ghaly Buchary - 13521015
-- Raditya Naufal Abiyu - 13521022
-- Fatih Nararya Rashadyfa I. - 13521060
