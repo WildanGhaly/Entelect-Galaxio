@@ -38,6 +38,7 @@ public class BotService {
     static boolean myTeleporter = false;
     static int staTick = 0;
     static UUID myTeleporterId = null;
+    static int teleportHeading = -1;
 
     public void computeNextPlayerAction(PlayerAction playerAction) {
         playerAction.action = PlayerActions.FORWARD;
@@ -141,7 +142,7 @@ public class BotService {
             } else {
                 foodFarEdgeDist = 99999;
             }
-            var teleportHeading=-1;
+
             /* Mendapatkan ukuran dari bot */
             var botsize = this.bot.size;
             var test=0;
@@ -152,7 +153,7 @@ public class BotService {
             boolean done = false;
 
             /* Membuat boolean untuk pengecekan apakah bot harus teleport */
-            boolean shouldTeleport = false;
+            boolean shouldTeleport = true;
 
             /* Melakukan pengecekan apakah ada teleporter di map */
 
@@ -182,7 +183,7 @@ public class BotService {
                 /* Mendapatkan kondisi teleporter, jika berbahaya maka bot tidak akan teleport */
                 for (j = 0; (j < teleporterList.size()) && (!done); j++){
                     while (k < playerList.size()){
-                        if ((getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100) && (playerList.get(k).size > botsize) && teleporterList.get(j).currentHeading == teleportHeading){
+                        if ((getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100) && (playerList.get(k).size > botsize) && teleporterList.get(j).currentHeading - teleportHeading < 10){
                             System.out.println("Bot is NOT going for TELEPORT!");
                             shouldTeleport = false;
                             break;
@@ -193,10 +194,10 @@ public class BotService {
                     
                 }
                 /* Mendapatkan kondisi teleporter apabila bot aman untuk teleport */
-                for (j = 0; (j < teleporterList.size()) && (!done) && (!shouldTeleport); j++){
+                for (j = 0; (j < teleporterList.size()) && (!done) && (shouldTeleport); j++){
                     k = 0;
                     while (k < playerList.size() && !done){
-                        if ((getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100 ) && (playerList.get(k).size < botsize)&& teleporterList.get(j).currentHeading == teleportHeading){
+                        if ((getDistanceBetween(teleporterList.get(j), playerList.get(k)) < 100) && (playerList.get(k).size < botsize)&& teleporterList.get(j).currentHeading - teleportHeading < 10){
                             System.out.println("Bot is going for TELEPORT!");
                             playerAction.heading = getHeadingBetween(playerList.get(k));
                             playerAction.action = PlayerActions.TELEPORT;
@@ -215,6 +216,9 @@ public class BotService {
                         haveTeleporter=false;
                     }
                 }
+            }
+            else if(teleporterList.size()==0){
+                haveTeleporter=false;
             }
             else {
                 // do nothing
@@ -244,7 +248,7 @@ public class BotService {
 
             /* Jika kondisi teleporter atau defending belum memberikan aksi maka akan masuk ke kondisional di bawah */
             if (!done){
-                if ((nearestPlayer < 200) && (botsize > 20)){
+                if ((nearestPlayer < 200 + 2 * playerList.get(0).getSize()) && (botsize > 20)){
                     /* Bot akan menembak dengan kondisi tertentu */
                     System.out.println("Bot is attacking!");
                     playerAction.action = PlayerActions.FIRETORPEDOES;
