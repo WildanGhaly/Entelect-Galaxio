@@ -50,7 +50,7 @@ public class BotService {
                 .stream().filter(item -> (item.getGameObjectType() == ObjectTypes.FOOD || 
                 item.getGameObjectType() == ObjectTypes.SUPERFOOD) && 
                 (double)this.gameState.getWorld().radius.intValue() - 
-                getDistanceBetween(item, this.gameState.getWorld()) >= 1.2 * 
+                getDistanceBetween(item, this.gameState.getWorld()) >= 1.4 * 
                 (double)this.bot.size.intValue()).sorted(Comparator.comparing(
                 item -> this.getDistanceBetween(this.bot, (GameObject)item)))
                 .collect(Collectors.toList());
@@ -158,7 +158,7 @@ public class BotService {
             /* Melakukan pengecekan apakah ada teleporter di map */
 
 
-            if (bordeRadius < botToMid + 1.2 * botsize){
+            if (bordeRadius < botToMid + 1.4 * botsize){
                 /* Bot menghindar dari border dan menuju ke tengah */
                 System.out.println("Bot is running from border!");
                 playerAction.heading = headMid;
@@ -258,7 +258,7 @@ public class BotService {
                     System.out.println("Bot is running for his life!");
                     playerAction.action = PlayerActions.FORWARD;
                     playerAction.heading = (headPlayer + 120) % 360;
-                } else if (bordeRadius < botToMid + 1.3 * botsize){
+                } else if (bordeRadius < botToMid + 1.4 * botsize){
                     /* Bot menghindar dari border dan menuju ke tengah */
                     System.out.println("Bot is running from border!");
                     playerAction.heading = headMid;
