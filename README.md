@@ -28,6 +28,6 @@ mvn clean package
 
 ### Authors
 
-Wildan Ghaly Buchary - 13521015
-Raditya Naufal Abiyu - 13521022
-Fatih Nararya Rashadyfa I. - 13521060
+- Hidayatullah Wildan Ghaly Buchary - 13521015
+- Raditya Naufal Abiyu - 13521022
+- Fatih Nararya Rashadyfa I. - 13521060
